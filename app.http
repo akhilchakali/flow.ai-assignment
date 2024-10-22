@@ -1,0 +1,36 @@
+POST http://localhost:3000/transactions
+Content-Type: application/json
+
+{
+    "id": 3,
+    "type": "income",
+    "category": "charan",
+    "amount": 1100,
+    "date": null,
+    "description": "nothing"
+  }
+
+###
+
+GET http://localhost:3000/transactions
+
+###
+GET http://localhost:3000/transactions/1
+
+###
+
+PUT http://localhost:3000/transactions/1
+Content-Type: application/json
+
+{
+    "id": 1,
+    "type": "income",
+    "category": "akhil",
+    "amount": 100,
+    "date": null,
+    "description": "nothing"
+  }
+
+###
+
+DELETE  http://localhost:3000/transactions/1
