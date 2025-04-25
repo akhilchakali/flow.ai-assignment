@@ -89,3 +89,91 @@ app.delete("/transactions/:id", async (request, response) => {
 );
 
 
+<div className="accordion-style">
+			<Accordion id={category}>
+				<AccordionItem opened={opened}>
+					<AccordionHeader
+						triggerType="icon"
+						onClick={() => setIsAccordionOpen(!isAccordionOpen)}
+					>
+						<AccordionTitle>
+							<div
+								style={{
+									display: 'flex',
+									flexDirection: 'row',
+									alignItems: 'center',
+									padding: '12px 16px',
+									gap: '16px',
+								}}
+							>
+								{isAccordionOpen ? (
+									<ChevronDown size={20} color="white" />
+								) : (
+									<ChevronRight size={20} color="white" />
+								)}
+								<p
+									style={{
+										fontStyle: 'normal',
+										fontWeight: '400',
+										fontSize: '16px',
+										lineHeight: '20px',
+										minWidth: '30%',
+									}}
+								>
+									{category}
+								</p>
+								<p
+									style={{
+										fontStyle: 'normal',
+										fontWeight: '400',
+										fontSize: '16px',
+										lineHeight: '20px',
+									}}
+								>
+									{`${completedQuestions} / ${totalNumberOfQuestions}`}
+								</p>
+								{completedQuestions ===
+									totalNumberOfQuestions &&
+									!disabled && (
+										<CheckCircleFill
+											size={20}
+											color="green"
+										/>
+									)}
+							</div>
+						</AccordionTitle>
+					</AccordionHeader>
+					<AccordionDetail>
+						{questions?.length &&
+							questions?.map(
+								(
+									{
+										combined_assessment_question: question,
+										answer,
+										explanation,
+										example,
+										options,
+										combined_assessment_id: questionId,
+									},
+									index,
+								) => (
+									<RiskAssessmentQuestion
+										questionId={questionId}
+										category={category}
+										question={question}
+										answer={answer}
+										options={options}
+										explanation={explanation}
+										example={example}
+										saveAnswer={option =>
+											saveAnswer({ index, option })
+										}
+										disabled={disabled}
+										opened={opened && index === 0}
+									/>
+								),
+							)}
+					</AccordionDetail>
+				</AccordionItem>
+			</Accordion>
+		</div>
